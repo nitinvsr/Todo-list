@@ -7,10 +7,6 @@ body {
     background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 }
 
-header {
-    font-size: x-large;
-}
-
 header,
 form {
     display: flex;
@@ -19,6 +15,10 @@ form {
     margin: 0px auto;
     margin-top: 5%;
     width: 40%;
+}
+header {
+    font-size: x-large;
+    width:60%;
 }
 
 form input,
