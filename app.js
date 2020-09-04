@@ -31,8 +31,12 @@ function addtodo(event) {
     trashbutton.innerHTML = '<i class="fas fa-trash"></i>';
     trashbutton.classList.add("trash-button");
     tododiv.appendChild(trashbutton);
+    //hr line
+    const hrline = document.createElement('hr');
+    hrline.classList.add('hr-line');
     //append to todolist
     todolist.appendChild(tododiv);
+    todolist.appendChild(hrline);
     //clear input textbox after appending
     todoinput.value = null;
 
@@ -43,13 +47,17 @@ function checked(event) {
     //check it
     if (item.classList[0] === 'complete-button') {
         const todo = item.parentElement;
+        const hr = item.parentElement.nextElementSibling
+        hr.classList.toggle('light-hr-line');
         todo.classList.toggle('completed');
 
     }
     if (item.classList[0] === 'trash-button') {
         const todo = item.parentElement;
+        const hr = item.parentElement.nextElementSibling
         todo.classList.add("fall");
         todo.addEventListener('transitionend', function() {
+            hr.remove();
             todo.remove();
         });
 

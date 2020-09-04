@@ -16,9 +16,10 @@ form {
     margin-top: 5%;
     width: 40%;
 }
+
 header {
     font-size: x-large;
-    width:60%;
+    width: 60%;
 }
 
 form input,
@@ -44,6 +45,7 @@ form button:hover {
 .todo-container {
     margin-top: 5%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -61,6 +63,7 @@ form button:hover {
 
 .todo-item {
     flex: 1;
+    word-wrap: break-word;
 }
 
 .complete-button,
@@ -95,4 +98,14 @@ form button:hover {
 .fall {
     transform: translateX(-200px);
     opacity: 0;
+}
+
+.hr-line {
+    color: gray;
+    opacity: 90%;
+    margin-top: 5px;
+}
+
+.light-hr-line {
+    opacity: 20%;
 }
