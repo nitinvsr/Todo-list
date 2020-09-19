@@ -7,18 +7,40 @@ const todolist = document.querySelector('.todo-list');
 todobutton.addEventListener('click', addtodo)
 todolist.addEventListener('click', checked)
 
+var retrievedObject = localStorage.getItem('storage');
+var rarr = [];
+rarr = JSON.parse(retrievedObject);
+console.log();
+for (var i = 0; i < rarr.length; i++) {
 
-
+    makeddiv(rarr[i]);
+}
 //functions
 function addtodo(event) {
     //prevents form submisson
     event.preventDefault();
     //each div of todo
-    const tododiv = document.createElement('div');
+
+    if (rarr.indexOf(todoinput.value) > -1) {
+        todoinput.value = null;
+        todoinput.placeholder = "Task Duplicated";
+    } else {
+        makeddiv(todoinput.value);
+        rarr.push(todoinput.value);
+        localStorage.setItem("storage", JSON.stringify(rarr))
+        todoinput.value = null;
+        todoinput.placeholder = "Add new task";
+
+    }
+}
+
+
+function makeddiv(data) {
+    var tododiv = document.createElement('div');
     tododiv.classList.add('todo');
     //li element inside div
     const newtodo = document.createElement('li');
-    newtodo.innerText = todoinput.value;
+    newtodo.innerText = data;
     newtodo.classList.add('todo-item');
     tododiv.appendChild(newtodo);
     //check mark button
@@ -34,12 +56,8 @@ function addtodo(event) {
     //hr line
     const hrline = document.createElement('hr');
     hrline.classList.add('hr-line');
-    //append to todolist
     todolist.appendChild(tododiv);
     todolist.appendChild(hrline);
-    //clear input textbox after appending
-    todoinput.value = null;
-
 }
 
 function checked(event) {
@@ -57,9 +75,16 @@ function checked(event) {
         const hr = item.parentElement.nextElementSibling
         todo.classList.add("fall");
         todo.addEventListener('transitionend', function() {
-            hr.remove();
-            todo.remove();
-        });
+                var index = rarr.indexOf(todo.innerText);
+                if (index > -1) {
+                    rarr.splice(index, 1);
+                }
+                localStorage.setItem('storage', JSON.stringify(rarr));
+                todo.remove();
+                hr.remove();
+            }
+
+        );
 
     }
 }
